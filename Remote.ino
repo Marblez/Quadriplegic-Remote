@@ -11,11 +11,15 @@ float buffer = 0;
 float offset = 7000;
 unsigned long StartTime = 0;
 
+
+int IRledPin =  13;    // LED connected to digital pin 13
+
 // Sets up Arduino on launch
 void setup()
 {
 Serial.begin(9600); // Serial connection rate
 pinMode(LED_BUILTIN, OUTPUT); // Enable LED Light Output
+pinMode(IRledPin, OUTPUT); 
 }
 
 void loop()
@@ -67,6 +71,7 @@ if((R2-R3)<offset){
 // If difference is over 7000 ohms, trigger TV and LED 
   Serial.println("Trigger the TV");
   digitalWrite(LED_BUILTIN, HIGH);
+  SendSignal();
   delay(2000);
   // Delays loop by 2 seconds to prevent
   // triggering of TV twice
@@ -83,3 +88,169 @@ delay(1000);
 }
 }
 
+void SendSignal() {
+  // This is the code for my particular Nikon, for others use the tutorial
+  // to 'grab' the proper code from the remote
+ 
+pulseIR(280);
+delayMicroseconds(1860);
+pulseIR(300);
+delayMicroseconds(760);
+pulseIR(360);
+delayMicroseconds(700);
+pulseIR(300);
+delayMicroseconds(780);
+pulseIR(280);
+delayMicroseconds(780);
+pulseIR(340);
+delayMicroseconds(1800);
+pulseIR(300);
+delayMicroseconds(760);
+pulseIR(300);
+delayMicroseconds(760);
+pulseIR(300);
+delayMicroseconds(780);
+pulseIR(280);
+delayMicroseconds(1860);
+pulseIR(300);
+delayMicroseconds(760);
+pulseIR(300);
+delayMicroseconds(760);
+pulseIR(300);
+delayMicroseconds(760);
+pulseIR(300);
+delayMicroseconds(1860);
+pulseIR(280);
+delayMicroseconds(780);
+pulseIR(340);
+delayMicroseconds(48540);
+pulseIR(300);
+delayMicroseconds(1860);
+pulseIR(280);
+delayMicroseconds(780);
+pulseIR(300);
+delayMicroseconds(760);
+pulseIR(300);
+delayMicroseconds(760);
+pulseIR(300);
+delayMicroseconds(760);
+pulseIR(300);
+delayMicroseconds(760);
+pulseIR(300);
+delayMicroseconds(1860);
+pulseIR(280);
+delayMicroseconds(1860);
+pulseIR(280);
+delayMicroseconds(1860);
+pulseIR(300);
+delayMicroseconds(760);
+pulseIR(300);
+delayMicroseconds(1860);
+pulseIR(280);
+delayMicroseconds(1860);
+pulseIR(300);
+delayMicroseconds(1840);
+pulseIR(300);
+delayMicroseconds(780);
+pulseIR(280);
+delayMicroseconds(1860);
+pulseIR(280);
+delayMicroseconds(44280);
+pulseIR(300);
+delayMicroseconds(1840);
+pulseIR(300);
+delayMicroseconds(780);
+pulseIR(280);
+delayMicroseconds(780);
+pulseIR(280);
+delayMicroseconds(780);
+pulseIR(280);
+delayMicroseconds(780);
+pulseIR(280);
+delayMicroseconds(1860);
+pulseIR(280);
+delayMicroseconds(780);
+pulseIR(300);
+delayMicroseconds(760);
+pulseIR(300);
+delayMicroseconds(760);
+pulseIR(300);
+delayMicroseconds(1860);
+pulseIR(300);
+delayMicroseconds(760);
+pulseIR(300);
+delayMicroseconds(760);
+pulseIR(300);
+delayMicroseconds(760);
+pulseIR(300);
+delayMicroseconds(1840);
+pulseIR(300);
+delayMicroseconds(780);
+pulseIR(280);
+delayMicroseconds(48620);
+pulseIR(280);
+delayMicroseconds(1860);
+pulseIR(300);
+delayMicroseconds(760);
+pulseIR(300);
+delayMicroseconds(760);
+pulseIR(300);
+delayMicroseconds(760);
+pulseIR(300);
+delayMicroseconds(760);
+pulseIR(300);
+delayMicroseconds(780);
+pulseIR(280);
+delayMicroseconds(1860);
+pulseIR(300);
+delayMicroseconds(1840);
+pulseIR(300);
+delayMicroseconds(1840);
+pulseIR(300);
+delayMicroseconds(780);
+pulseIR(280);
+delayMicroseconds(1860);
+pulseIR(280);
+delayMicroseconds(1860);
+pulseIR(280);
+delayMicroseconds(1880);
+pulseIR(280);
+delayMicroseconds(780);
+pulseIR(280);
+delayMicroseconds(1860);
+pulseIR(280);
+delayMicroseconds(44280);
+pulseIR(300);
+delayMicroseconds(1840);
+pulseIR(300);
+delayMicroseconds(760);
+pulseIR(300);
+delayMicroseconds(780);
+pulseIR(280);
+delayMicroseconds(780);
+pulseIR(280);
+delayMicroseconds(800);
+pulseIR(280);
+delayMicroseconds(1840);
+pulseIR(300);
+delayMicroseconds(760);
+pulseIR(300);
+delayMicroseconds(760);
+pulseIR(300);
+delayMicroseconds(780);
+pulseIR(280);
+delayMicroseconds(1860);
+pulseIR(300);
+delayMicroseconds(760);
+pulseIR(300);
+delayMicroseconds(760);
+pulseIR(300);
+delayMicroseconds(800);
+pulseIR(260);
+delayMicroseconds(1860);
+pulseIR(300);
+delayMicroseconds(760);
+pulseIR(300);
+Serial.println("Sent Signal"); 
+
+}
