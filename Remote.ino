@@ -10,6 +10,7 @@ float temp = 0;
 float buffer = 0;
 float offset = 7000;
 unsigned long StartTime = 0;
+float checkpoint = 0;
 
 
 int IRledPin =  13;    // LED connected to digital pin 13
@@ -28,7 +29,7 @@ void loop()
 unsigned long CurrentTime = millis();
 unsigned long ElapsedTime = CurrentTime - StartTime; 
 
-if(ElapsedTime<10000){
+if(ElapsedTime<10000 && checkpoint==1){
 // Only works for first 10 seconds
 // Prints time
 Serial.print("Time:");
@@ -37,6 +38,7 @@ Serial.println(ElapsedTime);
 raw= analogRead(analogPin);
 if(raw) //Output valid
 {
+
 // Calculates resistance of the photoresistor
 buffer= raw * Vin;
 Vout= (buffer)/1024.0;
@@ -52,7 +54,9 @@ else{
   // Averages previous and current value to set as R3
   temp = R3;
 }
-
+if((R2-R3)!<offset){
+  checkpoint = 1;
+}
 delay(1000);// Delays loop by 1 second
 }
 }
@@ -72,7 +76,7 @@ if((R2-R3)<offset){
   Serial.println("Trigger the TV");
   digitalWrite(LED_BUILTIN, HIGH);
   SendSignal();
-  delay(2000);
+  delay(1000);
   // Delays loop by 2 seconds to prevent
   // triggering of TV twice
 }
@@ -92,165 +96,101 @@ void SendSignal() {
   // This is the code for my particular Nikon, for others use the tutorial
   // to 'grab' the proper code from the remote
  
-pulseIR(280);
-delayMicroseconds(1860);
-pulseIR(300);
-delayMicroseconds(760);
-pulseIR(360);
-delayMicroseconds(700);
-pulseIR(300);
-delayMicroseconds(780);
-pulseIR(280);
-delayMicroseconds(780);
-pulseIR(340);
-delayMicroseconds(1800);
-pulseIR(300);
-delayMicroseconds(760);
-pulseIR(300);
-delayMicroseconds(760);
-pulseIR(300);
-delayMicroseconds(780);
-pulseIR(280);
-delayMicroseconds(1860);
-pulseIR(300);
-delayMicroseconds(760);
-pulseIR(300);
-delayMicroseconds(760);
-pulseIR(300);
-delayMicroseconds(760);
-pulseIR(300);
-delayMicroseconds(1860);
-pulseIR(280);
-delayMicroseconds(780);
-pulseIR(340);
-delayMicroseconds(48540);
-pulseIR(300);
-delayMicroseconds(1860);
-pulseIR(280);
-delayMicroseconds(780);
-pulseIR(300);
-delayMicroseconds(760);
-pulseIR(300);
-delayMicroseconds(760);
-pulseIR(300);
-delayMicroseconds(760);
-pulseIR(300);
-delayMicroseconds(760);
-pulseIR(300);
-delayMicroseconds(1860);
-pulseIR(280);
-delayMicroseconds(1860);
-pulseIR(280);
-delayMicroseconds(1860);
-pulseIR(300);
-delayMicroseconds(760);
-pulseIR(300);
-delayMicroseconds(1860);
-pulseIR(280);
-delayMicroseconds(1860);
-pulseIR(300);
-delayMicroseconds(1840);
-pulseIR(300);
-delayMicroseconds(780);
-pulseIR(280);
-delayMicroseconds(1860);
-pulseIR(280);
-delayMicroseconds(44280);
-pulseIR(300);
-delayMicroseconds(1840);
-pulseIR(300);
-delayMicroseconds(780);
-pulseIR(280);
-delayMicroseconds(780);
-pulseIR(280);
-delayMicroseconds(780);
-pulseIR(280);
-delayMicroseconds(780);
-pulseIR(280);
-delayMicroseconds(1860);
-pulseIR(280);
-delayMicroseconds(780);
-pulseIR(300);
-delayMicroseconds(760);
-pulseIR(300);
-delayMicroseconds(760);
-pulseIR(300);
-delayMicroseconds(1860);
-pulseIR(300);
-delayMicroseconds(760);
-pulseIR(300);
-delayMicroseconds(760);
-pulseIR(300);
-delayMicroseconds(760);
-pulseIR(300);
-delayMicroseconds(1840);
-pulseIR(300);
-delayMicroseconds(780);
-pulseIR(280);
-delayMicroseconds(48620);
-pulseIR(280);
-delayMicroseconds(1860);
-pulseIR(300);
-delayMicroseconds(760);
-pulseIR(300);
-delayMicroseconds(760);
-pulseIR(300);
-delayMicroseconds(760);
-pulseIR(300);
-delayMicroseconds(760);
-pulseIR(300);
-delayMicroseconds(780);
-pulseIR(280);
-delayMicroseconds(1860);
-pulseIR(300);
-delayMicroseconds(1840);
-pulseIR(300);
-delayMicroseconds(1840);
-pulseIR(300);
-delayMicroseconds(780);
-pulseIR(280);
-delayMicroseconds(1860);
-pulseIR(280);
-delayMicroseconds(1860);
-pulseIR(280);
-delayMicroseconds(1880);
-pulseIR(280);
-delayMicroseconds(780);
-pulseIR(280);
-delayMicroseconds(1860);
-pulseIR(280);
-delayMicroseconds(44280);
-pulseIR(300);
-delayMicroseconds(1840);
-pulseIR(300);
-delayMicroseconds(760);
-pulseIR(300);
-delayMicroseconds(780);
-pulseIR(280);
-delayMicroseconds(780);
-pulseIR(280);
-delayMicroseconds(800);
-pulseIR(280);
-delayMicroseconds(1840);
-pulseIR(300);
-delayMicroseconds(760);
-pulseIR(300);
-delayMicroseconds(760);
-pulseIR(300);
-delayMicroseconds(780);
-pulseIR(280);
-delayMicroseconds(1860);
-pulseIR(300);
-delayMicroseconds(760);
-pulseIR(300);
-delayMicroseconds(760);
-pulseIR(300);
-delayMicroseconds(800);
-pulseIR(260);
-delayMicroseconds(1860);
-pulseIR(300);
-delayMicroseconds(760);
-pulseIR(300);
-Serial.println("Sent Signal"); 
+pulseIR(2500);
+delayMicroseconds(580);
+pulseIR(640);
+delayMicroseconds(580);
+pulseIR(660);
+delayMicroseconds(580);
+pulseIR(640);
+delayMicroseconds(580);
+pulseIR(640);
+delayMicroseconds(580);
+pulseIR(1280);
+delayMicroseconds(580);
+pulseIR(640);
+delayMicroseconds(580);
+pulseIR(640);
+delayMicroseconds(580);
+pulseIR(1280);
+delayMicroseconds(580);
+pulseIR(640);
+delayMicroseconds(580);
+pulseIR(640);
+delayMicroseconds(580);
+pulseIR(660);
+delayMicroseconds(580);
+pulseIR(640);
+delayMicroseconds(27660);
+pulseIR(2500);
+delayMicroseconds(580);
+pulseIR(660);
+delayMicroseconds(560);
+pulseIR(660);
+delayMicroseconds(580);
+pulseIR(640);
+delayMicroseconds(580);
+pulseIR(660);
+delayMicroseconds(580);
+pulseIR(1260);
+delayMicroseconds(580);
+pulseIR(640);
+delayMicroseconds(580);
+pulseIR(660);
+delayMicroseconds(580);
+pulseIR(1260);
+delayMicroseconds(580);
+pulseIR(640);
+delayMicroseconds(580);
+pulseIR(660);
+delayMicroseconds(580);
+pulseIR(640);
+delayMicroseconds(580);
+pulseIR(640);
+delayMicroseconds(27680);
+pulseIR(2480);
+delayMicroseconds(600);
+pulseIR(640);
+delayMicroseconds(580);
+pulseIR(660);
+delayMicroseconds(560);
+pulseIR(660);
+delayMicroseconds(580);
+pulseIR(640);
+delayMicroseconds(580);
+pulseIR(1280);
+delayMicroseconds(560);
+pulseIR(660);
+delayMicroseconds(580);
+pulseIR(640);
+delayMicroseconds(580);
+pulseIR(1280);
+delayMicroseconds(560);
+pulseIR(660);
+delayMicroseconds(580);
+pulseIR(640);
+delayMicroseconds(580);
+pulseIR(660);
+delayMicroseconds(580);
+pulseIR(640);
+Serial.println("Sent Signal");
+}
 
+void pulseIR(long microsecs) {
+  // we'll count down from the number of microseconds we are told to wait
+ 
+  cli();  // this turns off any background interrupts
+ 
+  while (microsecs > 0) {
+    // 38 kHz is about 13 microseconds high and 13 microseconds low
+   digitalWrite(IRledPin, HIGH);  // this takes about 3 microseconds to happen
+   delayMicroseconds(10);         // hang out for 10 microseconds, you can also change this to 9 if its not working
+   digitalWrite(IRledPin, LOW);   // this also takes about 3 microseconds
+   delayMicroseconds(10);         // hang out for 10 microseconds, you can also change this to 9 if its not working
+ 
+   // so 26 microseconds altogether
+   microsecs -= 26;
+  }
+ 
+  sei();  // this turns them back on
 }
