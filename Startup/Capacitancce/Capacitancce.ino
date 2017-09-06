@@ -48,10 +48,16 @@ long cs2 = cap34.capacitiveSensor(80);
 
 
 void checkc2(){
-  
+if(c21>=3800){
+  countc2++;
+  delay(500);
+  //Check if 5 seconds has elapsed
+  //ElapsedTime ? (sendsignal1()) (checkc2())//
+  borderloop();
+}
 }
 void sendsignal1(){
-  switch(channel1){
+  switch(countc1){
   case 1:
   // Sends signal of 1 to the TV
   sendsignal2();
@@ -101,7 +107,8 @@ void sendsignal1(){
 }
 
 void sendsignal2(){
-    switch(channel2){
+  delay(1000);
+    switch(countc2){
   case 1:
   // Sends signal of 1 to the TV
   resetvalues();
