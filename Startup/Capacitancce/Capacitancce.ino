@@ -20,7 +20,7 @@ long cs1 = cap12.capacitiveSensor(80); // cs resolution is set to 80
 // CsSum 3800 is the threshold
 if(cs1>=3800){
   countc1++;
-  delay(1000);
+  delay(500);
   borderloop();
 }
 else{
@@ -33,15 +33,17 @@ void borderloop(){
 long cs1 = cap12.capacitiveSensor(80);
 long cs2 = cap34.capacitiveSensor(80);
   if(cs1>=3800){
-   countc1++;
+  countc1++;
+  delay(500);
   checkc1();
 }
   if(cs2>=3800){
     countc2++;
+    delay(500);
+    checkc2();
   }
-   checkc2();
   }
-}
+
 
 void checkc2(){
   
