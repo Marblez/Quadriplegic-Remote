@@ -5,7 +5,8 @@ void setup() {
   unsigned long cs2=0;
   int channel1 = 0;
   int channel2 = 0;
-  
+  int countc1 = 0;
+  int countc2 = 0;
 }
 
 void loop() {
@@ -13,15 +14,33 @@ void loop() {
  checkc1();
 }
 
+
 void checkc1(){
 long cs1 = cap12.capacitiveSensor(80); // cs resolution is set to 80
 // CsSum 3800 is the threshold
 if(cs1>=3800){
-  
+  countc1++;
+  delay(1000);
+  borderloop();
 }
 else{
-  
+  checkc1();
+  // Loops through checkc1 iteratively
 }
+}
+
+void borderloop(){
+long cs1 = cap12.capacitiveSensor(80);
+long cs2 = cap34.capacitiveSensor(80);
+  if(cs1>=3800){
+   countc1++;
+  checkc1();
+}
+  if(cs2>=3800){
+    countc2++;
+  }
+   checkc2();
+  }
 }
 
 void checkc2(){
